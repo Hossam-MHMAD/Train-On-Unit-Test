@@ -1,7 +1,6 @@
 import pytest
 from expense_tracker import ExpenseTracker
 
-pytest.MonkeyPatch.setattr()
 @pytest.fixture
 def Tracker():
 	return ExpenseTracker()
@@ -13,6 +12,14 @@ def test_init_expense_tracker(Tracker):
 
 
 def test_get_user_info(Tracker, monkeypatch):
-	pytest.monkeypatch.setattr("builtins.input", lambda _: {'name': 'Ahmed', 'age': 20})
+	inputs = iter(["Ahmed", "20"])  
+	monkeypatch.setattr("builtins.input", lambda _: next(inputs))
+
 	Tracker.get_user_info()
 	assert Tracker.user_info == {'name': 'Ahmed', 'age': 20}
+
+def test_main_screen(Tracker, monkeypatch):
+	monkeypatch.setattr("builtins.input", lambda _: 'ge')
+	with pytest.raises(ValueError):
+		Tracker.main_screen()
+
