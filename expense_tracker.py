@@ -50,8 +50,17 @@ class ExpenseTracker:
 			print(f"{i}) {expense} -> (Expense Name: {self.expensies[expense]["expense_name"]}, Expense Amount: ${self.expensies[expense]["expense_amount"]})")
 		print("-----------------------------------------------------------------------")
 
-	def remove_expense(self):
-		pass
+	def remove_expense(self, expense_number):
+		
+		print(list(self.expensies.keys))
+
+	def remove_expense_inputs(self):
+		self.get_expensies()
+		expense_num = int(input('Enter Expense Number You Want To Remove: '))
+		self.remove_expense(expense_num)
+
+		# okay from here i quit because i knew how to test okay! 😬😤😤
+
 
 	def remove_all_expensies(self):
 		pass
@@ -64,5 +73,3 @@ class ExpenseTracker:
 
 	def run(self):
 		pass
-
-print()

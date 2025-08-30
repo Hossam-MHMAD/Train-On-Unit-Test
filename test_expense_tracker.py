@@ -24,7 +24,22 @@ def test_main_screen(Tracker, monkeypatch):
 	with pytest.raises(ValueError):
 		Tracker.main_screen()
 
-def test_expense_validation(Tracker):
-	assert Tracker.check_expense(0) == False
-	assert Tracker.check_expense(-33) == False
-	assert Tracker.check_expense(4) == True
+# def test_expense_validation(Tracker):
+# 	assert Tracker.check_expense(0) == False
+# 	assert Tracker.check_expense(-33) == False
+# 	assert Tracker.check_expense(4) == True
+
+
+@pytest.mark.parametrize(
+	"expense_amount,expected", 
+	[
+		(20, True),
+		(30, True),
+		(20.2, True),
+		(.3, True),
+		(0, False),
+		(-34, False),
+		(-2.3, False)
+	])
+def test_expense_function(Tracker, expense_amount, expected):
+	assert Tracker.check_expense(expense_amount) == expected
