@@ -19,7 +19,12 @@ def test_get_user_info(Tracker, monkeypatch):
 	assert Tracker.user_info == {'name': 'Ahmed', 'age': 20}
 
 def test_main_screen(Tracker, monkeypatch):
+	"""using monkeypatch technique"""
 	monkeypatch.setattr("builtins.input", lambda _: 'ge')
 	with pytest.raises(ValueError):
 		Tracker.main_screen()
 
+def test_expense_validation(Tracker):
+	assert Tracker.check_expense(0) == False
+	assert Tracker.check_expense(-33) == False
+	assert Tracker.check_expense(4) == True
